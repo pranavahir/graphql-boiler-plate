@@ -32,6 +32,22 @@ module.exports = gql`
         address:UserAddress
         hobby:[UserHobby]
     }
+    type CompleteAddress{
+        city:String
+        state:String
+    }
+    type AllFamilyMembers{
+        relation:String
+        name:String
+    }
+    type UserData{
+        name:String
+        age:Int
+        isactive:Boolean
+        hobbies:[String]
+        address:CompleteAddress
+        familymembers:[AllFamilyMembers]
+    }
     input UserInput{
         name:String
         age:Int
@@ -51,9 +67,13 @@ module.exports = gql`
         #Graphql Output Example 4 (Output Can also be in Deeply Nested Way)
         outputExampleFour:UserOutputDDeeplyNested
         testQueryResolver:String
+        fetchUserData:[UserData]
     }
+    #Mutation -> For Storing or Updating Data
     type Mutation{
         testMutationResolver:String
+        #Store Data in MongoDB
+        storeUserData(name:String,age:Int,hobby:String,city:String,state:String,familymembername:String,familymenberrelation:String):UserData
     }
 
 `

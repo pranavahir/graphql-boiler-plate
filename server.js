@@ -4,6 +4,16 @@ const cors = require('cors')
 const express = require('express')
 const { ApolloServer} = require('apollo-server-express'); //Graphql Apollo Server Express
 const app = express();
+const mongoose = require('mongoose')
+const key = require('./config/keys') //Importing MongoDB URI
+mongoose.set({strictQuery:true})
+//Connecting MongoDB
+mongoose.connect(key.URI,{useUnifiedTopology:true,useNewUrlParser:true},(error) => {
+    if(error){
+        throw error
+    }
+    console.log("MongoDB CONNECTED")
+})
 //Initiate Graphql Server Function
 async function startServer() {
     const server = new ApolloServer({
